@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stopwatch</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #60a5fa;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #60a5fa88;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 15px;
+      padding: 20px 40px;
+      text-align: center;
+    }
+
+    .time {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #e0f2fe;
+      text-shadow: 0 0 10px #38bdf8;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+    }
+
+    button:hover {
+      background: #0ea5e9;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #0ea5e9aa;
+    }
+
+    .laps {
+      margin-top: 20px;
+      max-width: 360px;
+      width: 90%;
+      max-height: 200px;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.05);
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+    }
+
+    .laps p {
+      margin: 6px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-weight: 400;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #94a3b8;
+      text-shadow: 0 0 5px #33415588;
+    }
+
+    @media screen and (max-width: 600px) {
+      .glass {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .time {
+        font-size: 2.2em;
+      }
+
+      button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stopwatch</h1>
+
+  <div class="glass">
+    <div class="time" id="display">00:00:00</div>
+
+    <div class="buttons">
+      <button onclick="start()">Start</button>
+      <button onclick="pause()">Pause</button>
+      <button onclick="reset()">Reset</button>
+      <button onclick="lap()">Lap</button>
+    </div>
+
+    <div class="laps" id="laps"></div>
+  </div>
+
+  <div class="footer">✨ Built by Amisha ✨</div>
+
+  <script>
+    let [h, m, s] = [0, 0, 0];
+    let timer = null;
+    const display = document.getElementById('display');
+    const laps = document.getElementById('laps');
+
+    function updateDisplay() {
+      display.innerText = 
+        `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function tick() {
+      s++;
+      if (s === 60) {
+        s = 0;
+        m++;
+        if (m === 60) {
+          m = 0;
+          h++;
+        }
+      }
+      updateDisplay();
+    }
+
+    function start() {
+      if (!timer) {
+        timer = setInterval(tick, 1000);
+      }
+    }
+
+    function pause() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function reset() {
+      pause();
+      [h, m, s] = [0, 0, 0];
+      updateDisplay();
+      laps.innerHTML = '';
+    }
+
+    function lap() {
+      if (h !== 0 || m !== 0 || s !== 0) {
+        const lapTime = display.innerText;
+        const p = document.createElement('p');
+        p.textContent = `Lap: ${lapTime}`;
+        laps.appendChild(p);
+        laps.scrollTop = laps.scrollHeight;
+      }
+    }
+
+    updateDisplay();
+  </script>
+
+</body>
+</html>
