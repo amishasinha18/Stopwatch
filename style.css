@@ -6,6 +6,31 @@
   to { opacity: 1; transform: none; }
 }
 
+/* Status indicator */
+.status-pill {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out;
+}
+.status-pill.status-running {
+  color: #7dd3fc;
+  border-color: rgba(56,189,248,0.35);
+  background: rgba(56,189,248,0.1);
+}
+.status-pill.status-paused {
+  color: #fcd34d;
+  border-color: rgba(251,191,36,0.35);
+  background: rgba(251,191,36,0.1);
+}
+
 /* Digital readout */
 .time-display {
   font-size: 2.75rem;
@@ -20,6 +45,51 @@
 @keyframes readout-pulse {
   0%, 100% { text-shadow: 0 0 14px rgba(56,189,248,0.35); }
   50% { text-shadow: 0 0 22px rgba(56,189,248,0.6); }
+}
+
+.time-ms {
+  font-size: 0.62em;
+  font-weight: 600;
+  opacity: 0.65;
+}
+
+#timeMain.tick {
+  animation: digit-tick 0.22s ease-out;
+}
+@keyframes digit-tick {
+  0% { opacity: 0.55; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Progress ring */
+.progress-ring {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 132px;
+  height: 132px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+.progress-ring.visible {
+  opacity: 1;
+}
+.progress-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 2;
+}
+.progress-ring-fill {
+  fill: none;
+  stroke: #38bdf8;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 289;
+  stroke-dashoffset: 289;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 4px rgba(56,189,248,0.55));
 }
 
 /* Buttons */
@@ -85,6 +155,21 @@
   padding: 0.5rem 0.75rem;
   font-size: 0.85rem;
   animation: lap-in 0.25s ease-out;
+  transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+}
+.lap-row.newest {
+  background: rgba(56,189,248,0.1);
+  border-color: rgba(56,189,248,0.3);
+}
+.lap-row.newest .lap-index {
+  color: #7dd3fc;
+}
+.lap-empty {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-style: italic;
+  padding: 0.5rem 0;
 }
 .lap-row .lap-index {
   color: #94a3b8;
@@ -112,4 +197,6 @@
   .watch-card { animation: none; }
   .time-display.running { animation: none; }
   .lap-row { animation: none; }
+  #timeMain.tick { animation: none; }
+  .progress-ring { transition: none; }
 }

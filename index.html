@@ -25,11 +25,20 @@
 
 <div class="watch-card w-full max-w-sm bg-slate-800/40 backdrop-blur-xl rounded-3xl shadow-glow border border-white/10 p-6">
 
-  <h1 class="text-slate-300 text-sm font-bold tracking-wide uppercase text-center mb-5">Stopwatch</h1>
+  <h1 class="text-slate-300 text-sm font-bold tracking-wide uppercase text-center mb-2">Stopwatch</h1>
+  <div class="text-center mb-3">
+    <span id="statusIndicator" class="status-pill status-ready">Ready</span>
+  </div>
 
   <!-- Digital readout -->
-  <div class="bg-slate-950/60 border border-white/10 rounded-2xl px-4 py-8 mb-5 shadow-inner shadow-black/30">
-    <div id="display" class="time-display text-center text-sky-400 font-mono font-bold">00:00:00.00</div>
+  <div class="relative overflow-hidden bg-slate-950/60 border border-white/10 rounded-2xl px-4 py-8 mb-5 shadow-inner shadow-black/30">
+    <svg id="progressRing" class="progress-ring" viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="progress-ring-track" cx="50" cy="50" r="46"></circle>
+      <circle id="progressRingFill" class="progress-ring-fill" cx="50" cy="50" r="46"></circle>
+    </svg>
+    <div id="display" class="time-display relative text-center text-sky-400 font-mono font-bold">
+      <span id="timeMain">00:00:00</span><span id="timeMs" class="time-ms">.00</span>
+    </div>
   </div>
 
   <!-- Controls -->
@@ -43,8 +52,7 @@
   <!-- Lap list -->
   <div>
     <div class="flex items-center justify-between mb-2">
-      <span class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Laps</span>
-      <span id="lapEmptyHint" class="text-slate-500 text-[11px] italic">No laps yet</span>
+      <span id="lapCounter" class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Laps (0)</span>
     </div>
     <div id="lapList" class="lap-list space-y-1.5"></div>
   </div>
