@@ -120,7 +120,7 @@ function renderLaps() {
   lapListEl.innerHTML = '';
 
   if (laps.length === 0) {
-    lapListEl.innerHTML = '<div class="lap-empty">No laps yet</div>';
+    lapListEl.innerHTML = '<div class="lap-empty">No laps recorded yet</div>';
     return;
   }
 
