@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stopwatch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Segoe UI', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            glow: '0 0 17px rgba(56,189,248,0.14)',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen m-0 flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 font-sans p-4">
+
+<div class="watch-card w-full max-w-sm bg-slate-800/40 backdrop-blur-xl rounded-3xl shadow-glow border border-white/10 p-6">
+
+  <h1 class="text-slate-300 text-sm font-bold tracking-wide uppercase text-center mb-5">Stopwatch</h1>
+
+  <!-- Digital readout -->
+  <div class="bg-slate-950/60 border border-white/10 rounded-2xl px-4 py-8 mb-5 shadow-inner shadow-black/30">
+    <div id="display" class="time-display text-center text-sky-400 font-mono font-bold">00:00:00.00</div>
+  </div>
+
+  <!-- Controls -->
+  <div class="grid grid-cols-2 gap-3 mb-5">
+    <button id="startBtn" onclick="start()" class="watch-btn primary-btn">Start</button>
+    <button id="pauseBtn" onclick="pause()" class="watch-btn warn-btn" disabled>Pause</button>
+    <button id="lapBtn" onclick="lap()" class="watch-btn op-btn" disabled>Lap</button>
+    <button id="resetBtn" onclick="reset()" class="watch-btn danger-btn" disabled>Reset</button>
+  </div>
+
+  <!-- Lap list -->
+  <div>
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-slate-400 text-xs font-semibold uppercase tracking-wide">Laps</span>
+      <span id="lapEmptyHint" class="text-slate-500 text-[11px] italic">No laps yet</span>
+    </div>
+    <div id="lapList" class="lap-list space-y-1.5"></div>
+  </div>
+
+  <p class="text-center text-slate-500/70 text-[11px] tracking-wide mt-5">Built by AS</p>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
