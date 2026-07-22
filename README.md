@@ -13,22 +13,35 @@ It tracks elapsed time down to the centisecond, with full Start / Pause / Resume
 
 ## 📸 Screenshot / Preview
 
-<!--
-  Add a screenshot or short GIF of the stopwatch here, e.g.:
-  ![Stopwatch preview](./screenshot.png)
--->
-
-*(Screenshot coming soon — open `index.html` in your browser for a live look in the meantime.)*
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="./screenshots/ready-state.png" width="230" alt="Stopwatch — Ready state" /><br />
+      <sub><b>Ready</b></sub>
+    </td>
+    <td align="center">
+      <img src="./screenshots/running-with-laps.png" width="230" alt="Stopwatch — Running with progress ring and lap list" /><br />
+      <sub><b>Running — Progress Ring & Laps</b></sub>
+    </td>
+    <td align="center">
+      <img src="./screenshots/paused-state.png" width="230" alt="Stopwatch — Paused state" /><br />
+      <sub><b>Paused</b></sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
 ## ✨ Key Features
 
 - 🎨 **Dark glassmorphism design** — frosted-glass card, soft borders, and a subtle ambient glow over a dark gradient background, matching the rest of the portfolio's visual language.
-- ⏱️ **Precise digital readout** — `HH:MM:SS.CS` display accurate to the centisecond, driven by `requestAnimationFrame` against a real timestamp rather than a naive one-second interval, so it never drifts.
+- ⏱️ **Precise digital readout** — `HH:MM:SS.CS` display accurate to the centisecond, driven by `requestAnimationFrame` against a real timestamp rather than a naive one-second interval, so it never drifts. Milliseconds render smaller and lighter than the main digits for readability.
+- 🔵 **Circular progress ring** — a subtle ring sweeps around the readout once per second while running, freezes in place when paused, and hides at rest.
+- 🚦 **Status indicator** — a small Ready / Running / Paused pill below the title with a soft per-state glow.
 - ▶️ **Start / Pause / Resume / Reset controls** — buttons enable and disable based on the current state (e.g. Reset is only available once the watch is stopped), and Start relabels itself to Resume after a pause.
-- 🏁 **Lap timing** — record laps while running; each entry shows its split (time since the previous lap) alongside the cumulative total, in a scrollable list.
-- 🎬 **Smooth UI** — a gentle glow pulse on the readout while running, buttons that lift and glow on hover, and new lap rows animate in.
+- 🏁 **Lap timing** — record laps while running; a live "Laps (N)" counter tracks the count, each entry shows its split and cumulative time, and the newest lap stays highlighted.
+- ⌨️ **Keyboard shortcuts** — `Space` to start/pause, `L` to lap, `R` to reset.
+- 🎬 **Smooth UI** — buttons that lift and glow on hover, new lap rows animate in, and the seconds digit gets a brief tick animation each time it changes.
 - 📱 **Responsive design** — scales cleanly across desktop, tablet, and mobile screens.
 
 ---
@@ -58,7 +71,6 @@ That's it — the stopwatch runs entirely client-side.
 
 - 📤 Export lap times (CSV)
 - 🔊 Sound cue on lap / reset
-- ⌨️ Keyboard shortcuts (space to start/pause, L to lap)
 - 🌗 Light/dark theme switcher
 - 📴 Offline support via PWA
 
